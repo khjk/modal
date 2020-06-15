@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            all:unset;
+            background-color:steelblue;
+            color:white;
+            padding: 5px 20px;
+            border-radius : 5px;
+            cursor: pointer;
+        }
+        .modal{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal_overlay{
+            position:absolute;
+            background-color: rgba(0, 0, 0, 0.6);
+            width: 100%;
+            height:100%;
+        }
+        .modal_content{
+            background-color: white;
+            padding: 50px 100px;
+            text-align: center;
+            position: relative;
+            border-radius: 10px;
+            width: 10%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            animation : fadeIn .5s linear;
+        }
+        h1{
+            margin: 0;
+        }
+        .hidden{
+            display:none;
+        }
+        @keyframes fadeIn{
+            from{
+                opacity : 0;
+            }to{
+                opacity : 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="open">open Modal</button>
+    <div class="modal hidden">
+        <div class="modal_overlay"></div>
+        <div class="modal_content">
+            <h1>I'm a modal</h1>
+            <button>❌</button>
+        </div>
+    </div>
+    <script>
+        const modalBtn = document.getElementById("open");
+        const modal = document.querySelector(".modal");
+        const overlay = modal.querySelector(".modal_overlay");
+        const closeBtn = modal.querySelector("button");
+        function handleModalBtnClick(event){ //감춰놓았던걸 클래스없애면서 보여줌
+            modal.classList.remove("hidden");
+        }
+        function handleCloseBtnClick(event){
+            modal.classList.add("hidden");
+        }
+        overlay.addEventListener("click",handleCloseBtnClick); //오버레이가 눌려도 클로즈버튼누른것과 같은 효과
+        modalBtn.addEventListener("click", handleModalBtnClick);
+        closeBtn.addEventListener("click",handleCloseBtnClick);
+    </script>
+</body>
+</html>
